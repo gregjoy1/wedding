@@ -1,14 +1,14 @@
 module ApiHelper
 
-  def serialize_response(error, data)
+  def self.serialize_response(error, data)
     {
-      errror: errror,
-      data: data
+      :error => error,
+      :data => data
     }
   end
 
-  def render_response(errror, data)
-    render plain: (serialize_response(errror, data).to_json)
+  def self.render_response(error, data)
+    self.serialize_response(error, data).to_json
   end
 
 end
