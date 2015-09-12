@@ -2,6 +2,9 @@ module SessionHelper
 
   def self.login(session, password)
     guest = false
+
+    password = HashHelper.password_hash(password)
+
     if (guest = Guest.where(:password => password).first).present?
       session[:user] = guest.id
     else

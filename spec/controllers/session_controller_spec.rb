@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe SessionController, type: :controller do
 
   before(:all) do
-    @guest = Guest.create(:name => 'Test Guest', :password => 'test')
+    @guest = Guest.create(
+      :name => 'Test Guest',
+      :password => HashHelper.password_hash('test')
+    )
   end
 
   context 'is_logged_in route' do
