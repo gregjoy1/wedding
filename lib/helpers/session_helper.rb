@@ -1,16 +1,16 @@
 module SessionHelper
 
-  def self.login(password)
+  def self.login(session, password)
     guest = false
-    if (guest = Guest.where(:password => password)).present?
+    if (guest = Guest.where(:password => password).first).present?
       session[:user] = guest.id
     else
-      logout
+      logout(session)
     end
     guest
   end
 
-  def self.logout
+  def self.logout(session)
     session[:user] = nil
   end
 

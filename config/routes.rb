@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   scope '/api', { format: :json } do
-    get 'session/index'
+    get 'session/' => 'session#is_logged_in'
     post 'session/login'
     get 'session/logout'
   end
