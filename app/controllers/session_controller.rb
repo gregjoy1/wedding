@@ -30,7 +30,7 @@ class SessionController < ApplicationController
     else
       if (guest = SessionHelper.login(session, posted_password)).present?
         data = {
-          :guest => GuestsHelper.serialize_guest(guest)
+          :guest => GuestHelper.serialize_guest(guest)
         }
       else
         status = 403
@@ -42,7 +42,13 @@ class SessionController < ApplicationController
   end
 
   def logout
-    render plain: "logout"
+    errors = []
+    data = {}
+    status = 200
+
+    SessionHelper.logout(session)
+
+    render plain: ApiHelper.render_response(errors, data), status: status
   end
 
 end

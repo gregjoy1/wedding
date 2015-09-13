@@ -14,6 +14,17 @@ RSpec.describe SessionController, type: :controller do
   end
 
   context 'is_logged_in route' do
+    context 'when logged in' do
+      it 'returns 200' do
+        session['user'] = @guest.id
+
+        get :is_logged_in
+        expect(response.status).to eql(200)
+
+        session['user'] = nil
+      end
+    end
+
     context 'when not logged in' do
       it 'returns 403' do
         get :is_logged_in
@@ -32,6 +43,7 @@ RSpec.describe SessionController, type: :controller do
       expect(response.status).to eql(400)
       expect(data['error']).to eql(['Bad Request'])
       expect(data['data']).to eql({})
+      expect(session['user']).to eql(nil)
     end
 
     it 'returns appropriately when posting incorrect login credentials' do
@@ -42,6 +54,7 @@ RSpec.describe SessionController, type: :controller do
       expect(response.status).to eql(403)
       expect(data['error']).to eql(['Incorrect Password'])
       expect(data['data']).to eql({})
+      expect(session['user']).to eql(nil)
     end
 
     it 'returns appropriately when posting correct login credentials' do
@@ -54,8 +67,24 @@ RSpec.describe SessionController, type: :controller do
       expect(data['data']['guest']['id']).to eql(@guest.id)
       expect(data['data']['guest']['name']).to eql(@guest.name)
       expect(data['data']['guest']['rspv']).to eql(@guest.rspv)
+      expect(session['user']).to eql(@guest.id)
     end
 
+  end
+
+  context 'logout route' do
+
+    it 'deletes session when route is called' do
+      session['user'] = @guest.id
+
+      get :logout
+
+      data = JSON.parse(response.body)
+
+      expect(response.status).to eql(200)
+      expect(data['error']).to eql([])
+      expect(session['user']).to eql(nil)
+    end
   end
 
 end

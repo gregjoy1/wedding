@@ -34,7 +34,7 @@ module Wedding
 
     include SessionHelper
     include ApiHelper
-    include GuestsHelper
+    include GuestHelper
     include HashHelper
   end
 end
