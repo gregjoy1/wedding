@@ -18,10 +18,14 @@ module SessionHelper
   end
 
   def self.is_logged_in(session)
-    if session[:user].present? && (guest = Guest.find(session[:user])).present?
-     return guest
+    begin
+      if session[:user].present? && (guest = Guest.find(session[:user])).present?
+        return guest
+      end
+      nil
+    rescue => e
+      nil
     end
-    nil
   end
 
 end
