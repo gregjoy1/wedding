@@ -1,22 +1,21 @@
 {
-    "name": "Greg and Mel - Wedding Website",
-    "version": "0.0.0",
-    "authors": [
-        "Greg Joy <greg@gregjoy.co.uk>"
-    ],
-    "license": "Commercial",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "lodash": "2.4.1",
-        "angular": "1.4.5",
-        "angular-animate": "1.4.5",
-        "components-font-awesome": "4.4.0"
-    }
+  "name": "Greg and Mel - Wedding Website",
+  "version": "0.0.0",
+  "authors": [
+    "Greg Joy <greg@gregjoy.co.uk>"
+  ],
+  "license": "Commercial",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "2.4.1",
+    "angular": "1.4.5",
+    "angular-route": "~1.4.6",
+    "components-font-awesome": "4.4.0"
+  }
 }
-

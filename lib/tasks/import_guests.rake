@@ -10,7 +10,7 @@ task :import => [:environment] do
       name: row[0],
       password: HashHelper.password_hash(row[1]),
       rspv: '-'
-    )
+    ).save
   end
 
 end

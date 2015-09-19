@@ -19,15 +19,9 @@
 
   </head>
 
-  <body>
+  <body ng-cloak ng-app="wedding">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <h1>Test</h1>
-        </div>
-      </div>
-    </div>
+    <div class="fluid-container" ng-view></div>
 
     <%= javascript_include_tag "application" %>
   </body>

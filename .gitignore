@@ -22,4 +22,5 @@
 /tmp
 
 bower_components
+node_modules
 vendor/assets/components
