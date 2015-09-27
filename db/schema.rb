@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920153604) do
+ActiveRecord::Schema.define(version: 20150920163055) do
 
   create_table "guests", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20150920153604) do
   end
 
   add_index "guests", ["login_id"], name: "index_guests_on_login_id"
+
+  create_table "login_histories", force: :cascade do |t|
+    t.string   "user_agent"
+    t.datetime "logged_in"
+    t.datetime "last_activity"
+    t.integer  "login_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "login_histories", ["login_id"], name: "index_login_histories_on_login_id"
 
   create_table "logins", force: :cascade do |t|
     t.string   "name"

@@ -5,27 +5,32 @@ RSpec.describe SessionHelper do
   include SessionHelper
 
   before(:all) do
-    @guest = Guest.create(
-      :name => 'Test Guest',
+    @user_agent = 'test user agent'
+    @login = Login.create(
+      :name => 'Test Login',
       :password => HashHelper.password_hash('test')
     )
   end
 
   after(:all) do
-    @guest.destroy!
+    @login.destroy!
   end
 
   context 'is_logged_in' do
     context 'when logged in with existing user' do
       before(:all) do
         @session = {
-          :user => @guest.id
+          :user => @login.id
         }
-        @is_logged_in_returned = SessionHelper.is_logged_in(@session)
+        @is_logged_in_returned = SessionHelper.is_logged_in(@session, @user_agent)
       end
 
-      it('returns guest') do
-        expect(@is_logged_in_returned).to eql(@guest)
+      it('returns login') do
+        expect(@is_logged_in_returned).to eql(@login)
+      end
+
+      it('updates login history') do
+        expect(LoginHistory.last.user_agent).to eql(@user_agent)
       end
     end
 
@@ -34,10 +39,10 @@ RSpec.describe SessionHelper do
         @session = {
           :user => 'test'
         }
-        @is_logged_in_returned = SessionHelper.is_logged_in(@session)
+        @is_logged_in_returned = SessionHelper.is_logged_in(@session, @user_agent)
       end
 
-      it('returns guest') do
+      it('returns login') do
         expect(@is_logged_in_returned).to eql(nil)
       end
     end
@@ -45,10 +50,10 @@ RSpec.describe SessionHelper do
     context 'when not logged in' do
       before(:all) do
         @session = {}
-        @is_logged_in_returned = SessionHelper.is_logged_in(@session)
+        @is_logged_in_returned = SessionHelper.is_logged_in(@session, @user_agent)
       end
 
-      it('returns guest') do
+      it('returns login') do
         expect(@is_logged_in_returned).to eql(nil)
       end
     end
@@ -60,7 +65,7 @@ RSpec.describe SessionHelper do
         @session = {
           :user => 'test'
         }
-        @login_returned = SessionHelper.login(@session, 'wrong password')
+        @login_returned = SessionHelper.login(@session, 'wrong password', @user_agent)
       end
 
       it('returns nil') do
@@ -75,15 +80,15 @@ RSpec.describe SessionHelper do
     context 'provided with correct login credentials' do
       before(:all) do
         @session = {}
-        @login_returned = SessionHelper.login(@session, 'test')
+        @login_returned = SessionHelper.login(@session, 'test', @user_agent)
       end
 
-      it('returns guest') do
-        expect(@login_returned.id).to eql(@guest.id)
+      it('returns login') do
+        expect(@login_returned.id).to eql(@login.id)
       end
 
       it('correctly updates session') do
-        expect(@session[:user]).to eql(@guest.id)
+        expect(@session[:user]).to eql(@login.id)
       end
     end
   end

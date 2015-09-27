@@ -7,7 +7,7 @@ RSpec.describe SessionHelper do
   before(:all) do
     @guest = Guest.create(
       :name => 'Test Guest',
-      :password => HashHelper.password_hash('test')
+      :rspv => GuestHelper::RSPV_COMING
     )
   end
 

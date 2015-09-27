@@ -6,7 +6,7 @@ task :import => [:environment] do
   file = "db/guests.csv"
 
   CSV.foreach(file, :headers => true) do |row|
-    login = Login.new(
+    login = Login.create(
       name: row[0],
       password: HashHelper.password_hash(row[1])
     )

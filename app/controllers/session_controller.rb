@@ -5,13 +5,13 @@ class SessionController < ApplicationController
     data = {}
     status = 200
 
-    guest = SessionHelper.is_logged_in(session)
+    login = SessionHelper.is_logged_in(session, request.env['HTTP_USER_AGENT'])
 
-    if guest.nil?
+    if login.nil?
       status = 403
       errors = 'Not logged in'
     else
-      data['guest'] = GuestHelper.serialize_guest(guest)
+      data['login'] = LoginHelper.serialize_login(login)
     end
 
     render plain: ApiHelper.render_response(errors, data), status: status
@@ -28,9 +28,9 @@ class SessionController < ApplicationController
       status = 400
       errors << 'Bad Request'
     else
-      if (guest = SessionHelper.login(session, posted_password)).present?
+      if (login = SessionHelper.login(session, posted_password, request.env['HTTP_USER_AGENT'])).present?
         data = {
-          :guest => GuestHelper.serialize_guest(guest)
+          :login => LoginHelper.serialize_login(login)
         }
       else
         status = 403

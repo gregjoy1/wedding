@@ -3,20 +3,25 @@ require 'rails_helper'
 RSpec.describe SessionController, type: :controller do
 
   before(:all) do
-    @guest = Guest.create(
+    @user = Login.create(
       :name => 'Test Guest',
       :password => HashHelper.password_hash('test')
+    )
+
+    @user.guests << Guest.create(
+      name: 'Test Guest',
+      rspv: '-'
     )
   end
 
   after(:all) do
-    @guest.destroy!
+    @user.destroy!
   end
 
   context 'is_logged_in route' do
     context 'when logged in' do
       it 'returns 200' do
-        session['user'] = @guest.id
+        session['user'] = @user.id
 
         get :is_logged_in
         expect(response.status).to eql(200)
@@ -64,10 +69,10 @@ RSpec.describe SessionController, type: :controller do
 
       expect(response.status).to eql(200)
       expect(data['error']).to eql([])
-      expect(data['data']['guest']['id']).to eql(@guest.id)
-      expect(data['data']['guest']['name']).to eql(@guest.name)
-      expect(data['data']['guest']['rspv']).to eql(@guest.rspv)
-      expect(session['user']).to eql(@guest.id)
+      expect(data['data']['login']['id']).to eql(@user.id)
+      expect(data['data']['login']['name']).to eql(@user.name)
+      expect(data['data']['login']['guests'][0]['rspv']).to eql(@user.guests.first.rspv)
+      expect(session['user']).to eql(@user.id)
     end
 
   end
@@ -75,7 +80,7 @@ RSpec.describe SessionController, type: :controller do
   context 'logout route' do
 
     it 'deletes session when route is called' do
-      session['user'] = @guest.id
+      session['user'] = @user.id
 
       get :logout
 
