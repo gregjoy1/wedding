@@ -1,9 +1,9 @@
 ; (function (angular) {
   'use strict';
 
-  angular.module('home')
+  angular.module('rspv')
     .controller(
-      'HomeController',
+      'RspvController',
       [
         '$scope',
         'login',
@@ -14,3 +14,4 @@
     );
 
 }(window.angular));
+

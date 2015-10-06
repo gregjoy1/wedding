@@ -21,6 +21,9 @@
 //= require home/home.module.js
 //= require home/home.controller.js
 //
+//= require rspv/rspv.module.js
+//= require rspv/rspv.controller.js
+//
 //= require session/session.module.js
 //= require session/session.service.js
 //
@@ -37,6 +40,7 @@
       'ngRoute',
       'session',
       'home',
+      'rspv',
       'login'
     ]
   )
@@ -45,22 +49,35 @@
         '$routeProvider',
         '$locationProvider',
         function ($routeProvider, $locationProvider) {
+
+          var getCurrentLogin = [
+            '$location',
+            'SessionService',
+            function ($location, SessionService) {
+              return SessionService
+                .isLoggedIn()
+                  .then(function (response) {
+                    return response.data.data.login;
+                  })
+                  .catch(function () {
+                    $location.path('/login');
+                  });
+            }
+          ];
+
           $routeProvider
             .when('/', {
               templateUrl: '/assets/home/home.partial.html',
               controller: 'HomeController',
               resolve: {
-                guest: function ($location, SessionService) {
-                  console.log('yoyoyo');
-                  return SessionService
-                    .isLoggedIn()
-                      .then(function (response) {
-                        return response.data.guest;
-                      })
-                      .catch(function () {
-                        $location.path('/login');
-                      });
-                }
+                login: getCurrentLogin
+              }
+            })
+            .when('/rspv', {
+              templateUrl: '/assets/rspv/rspv.partial.html',
+              controller: 'RspvController',
+              resolve: {
+                login: getCurrentLogin
               }
             })
             .when('/login', {
