@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pry'
 gem 'pry-remote'
 
+gem 'font-awesome-sass'
+
 gem 'angular_rails_csrf'
 
 # Use ActiveModel has_secure_password

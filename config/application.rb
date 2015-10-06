@@ -33,9 +33,9 @@ module Wedding
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    helper_dir = "#{Rails.root.join('lib')}/helpers/"
+    helper_dir = Rails.root.join('lib', 'helpers').to_s
 
-    Dir["#{helper_dir}*_helper.rb"].each do |helper|
+    Dir["#{helper_dir}/*_helper.rb"].each do |helper|
       require helper
     end
 

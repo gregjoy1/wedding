@@ -1,0 +1,19 @@
+.page-header {
+  h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 75px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 100px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 125px;
+    }
+  }
+
+  &.no-border {
+    border: none;
+  }
+}
