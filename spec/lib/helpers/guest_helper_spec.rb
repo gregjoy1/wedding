@@ -4,19 +4,19 @@ require "#{Rails.root.join('lib')}/helpers/guest_helper.rb"
 RSpec.describe SessionHelper do
   include GuestHelper
 
-  before(:all) do
+  before(:each) do
     @guest = Guest.create(
       :name => 'Test Guest',
       :rspv => GuestHelper::RSPV_COMING
     )
   end
 
-  after(:all) do
+  after(:each) do
     @guest.destroy!
   end
 
   context 'serialize_guest' do
-    before(:all) do
+    before(:each) do
       @serialize_guest_returned = GuestHelper.serialize_guest(@guest)
     end
 

@@ -4,11 +4,11 @@ require "#{Rails.root.join('lib')}/helpers/api_helper.rb"
 RSpec.describe SessionHelper do
   include ApiHelper
 
-  before(:all) do
+  before(:each) do
   end
 
   context 'serialize_response' do
-    before(:all) do
+    before(:each) do
       @error = {
         :error => 'error'
       }
@@ -30,7 +30,7 @@ RSpec.describe SessionHelper do
   end
 
   context 'render_response' do
-    before(:all) do
+    before(:each) do
       error = {
         :error => 'error'
       }

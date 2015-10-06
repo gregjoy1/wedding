@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe SessionController, type: :controller do
 
   before(:all) do
+    Login.destroy_all
+    Guest.destroy_all
+
     @user = Login.create(
       :name => 'Test Guest',
       :password => HashHelper.password_hash('test')
@@ -12,10 +15,6 @@ RSpec.describe SessionController, type: :controller do
       name: 'Test Guest',
       rspv: '-'
     )
-  end
-
-  after(:all) do
-    @user.destroy!
   end
 
   context 'is_logged_in route' do

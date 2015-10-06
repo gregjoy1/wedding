@@ -5,15 +5,14 @@ RSpec.describe SessionHelper do
   include SessionHelper
 
   before(:all) do
+    Login.destroy_all
+    Guest.destroy_all
+
     @user_agent = 'test user agent'
     @login = Login.create(
       :name => 'Test Login',
       :password => HashHelper.password_hash('test')
     )
-  end
-
-  after(:all) do
-    @login.destroy!
   end
 
   context 'is_logged_in' do

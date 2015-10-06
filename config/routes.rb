@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get 'session/' => 'session#is_logged_in'
     post 'session/login'
     get 'session/logout'
+
+    put 'guests/:guest_id' => 'guests#update_guest'
   end
 
   root 'index#index'

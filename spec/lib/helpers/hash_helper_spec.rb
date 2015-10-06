@@ -4,11 +4,11 @@ require "#{Rails.root.join('lib')}/helpers/hash_helper.rb"
 RSpec.describe SessionHelper do
   include HashHelper
 
-  before(:all) do
+  before(:each) do
   end
 
   context 'password_hash' do
-    before(:all) do
+    before(:each) do
       @password_hash_returned = HashHelper.password_hash("test")
     end
 
@@ -18,7 +18,7 @@ RSpec.describe SessionHelper do
   end
 
   context 'interleave_strings' do
-    before(:all) do
+    before(:each) do
       @interleave_strings_returned = HashHelper.interleave_strings("hahahahah", "yes hello")
     end
 
