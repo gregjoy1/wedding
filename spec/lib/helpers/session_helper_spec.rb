@@ -18,6 +18,15 @@ RSpec.describe SessionHelper do
   context 'is_logged_in' do
     context 'when logged in with existing user' do
       before(:all) do
+        LoginHistory.destroy_all
+
+        @login_history_time = (Time.now - 1.hour)
+        LoginHistory.create(
+          :user_agent => @user_agent,
+          :logged_in => @login_history_time,
+          :last_activity => @login_history_time
+        )
+
         @session = {
           :user => @login.id
         }
@@ -30,6 +39,7 @@ RSpec.describe SessionHelper do
 
       it('updates login history') do
         expect(LoginHistory.last.user_agent).to eql(@user_agent)
+        expect(LoginHistory.last.last_activity).to_not eql(@login_history_time)
       end
     end
 
@@ -61,6 +71,7 @@ RSpec.describe SessionHelper do
   context 'login' do
     context 'provided with incorrect login credentials' do
       before(:all) do
+        LoginHistory.destroy_all
         @session = {
           :user => 'test'
         }
@@ -73,6 +84,12 @@ RSpec.describe SessionHelper do
 
       it('correctly clear session') do
         expect(@session['user']).to eql(nil)
+      end
+
+      it('correctly does not create login history entry') do
+        latest_login_history = LoginHistory.where(:login_id => @session['user']).last
+
+        expect(latest_login_history).to eql(nil)
       end
     end
 
@@ -88,6 +105,14 @@ RSpec.describe SessionHelper do
 
       it('correctly updates session') do
         expect(@session[:user]).to eql(@login.id)
+      end
+
+      it('correctly creates login history entry') do
+        latest_login_history = LoginHistory.where(:login_id => @login_returned.id).last
+
+        expect(latest_login_history.last_activity.today?).to eql(true)
+        expect(latest_login_history.logged_in.today?).to eql(true)
+        expect(latest_login_history.user_agent).to eql(@user_agent)
       end
     end
   end

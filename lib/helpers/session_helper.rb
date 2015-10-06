@@ -22,12 +22,11 @@ module SessionHelper
                         .last
 
     if is_login || login_history.nil?
-      login.login_historys << LoginHistory.new(
+      login.login_historys << LoginHistory.create(
         :user_agent => user_agent,
         :logged_in => Time.now,
         :last_activity => Time.now
       )
-      login.save
     else
       login_history.last_activity = Time.now
       login_history.save
