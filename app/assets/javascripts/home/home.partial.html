@@ -1,45 +1,26 @@
-<div class="container">
+<div class="container fade-in-animation">
   <div class="row">
     <div class="page-header no-border">
-      <h1 class="center-align underline">Welcome, <small>{{ login.name }}!</small></h1>
+      <h1 class="center-align bold">Welcome, <small>{{ login.name }}!</small></h1>
     </div>
   </div>
 
-  <div class="row nav-menu">
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-bed"></i>&nbsp;Accomodation</h1>
+  <div class="row panel-menu">
+    <div class="{{ page.classString }}" ng-repeat="page in pages" ng-click="page.go()">
+      <div class="panel-btn">
+        <h1>
+          <i class="fa {{ page.faClass }} fa-lg"></i>
+          &nbsp;&nbsp;{{ page.title }}
+        </h1>
       </div>
     </div>
+  </div>
 
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-map-marker"></i>&nbsp;Venue</h1>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-phone"></i>&nbsp;Contact</h1>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-clock-o"></i>&nbsp;Schedule</h1>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-cutlery"></i>&nbsp;Menu</h1>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6 margin-bottom-md">
-      <div class="nav-btn">
-        <h1><i class="fa fa-gift"></i>&nbsp;Gifts</h1>
-      </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="center-align">
+        Made with <i class="fa fa-heart"></i> by <a href="http://gregjoy.co.uk" target="_blank">Greg Joy</a>
+      </p>
     </div>
   </div>
 </div>

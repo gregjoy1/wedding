@@ -1,10 +1,43 @@
-<div class="container">
-  <form class="form-horizontal">
-    <div class="form-group">
-      <input type="password" class="form-control" id="password" placeholder="Please enter the password you were provided" ng-model="formParams.password">
+<div class="container fade-in-animation">
+
+  <div class="row">
+    <div class="page-header no-border">
+      <h1 class="center-align underline">Mel&nbsp;<small class="bold">&amp;</small>&nbsp;Greg&nbsp;</h1>
+      <h2 class="center-align bold no-padding no-margin"><small>2016</small></h2>
     </div>
-    <button type="submit" class="btn btn-primary col-xs-12" ng-click="login()">
-      Login!
-    </button>
-  </form>
+  </div>
+
+  <div class="col-xs-6 col-xs-offset-3">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <input type="password" class="form-control col-xs-12 input-lg" id="password" placeholder="Please enter the password you were provided" ng-model="formParams.password">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg col-xs-12" ng-click="login()">
+          Login!
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container fade-in-animation">
+  <div class="row panel-menu">
+    <div class="{{ page.classString }}" ng-repeat="page in pages" ng-click="page.go()">
+      <div class="panel-btn">
+        <h1>
+          <i class="fa {{ page.faClass }} fa-lg"></i>
+          &nbsp;&nbsp;{{ page.title }}
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="center-align">
+        Made with <i class="fa fa-heart"></i> by <a href="http://gregjoy.co.uk" target="_blank">Greg Joy</a>
+      </p>
+    </div>
+  </div>
 </div>

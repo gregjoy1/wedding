@@ -84,6 +84,42 @@
               templateUrl: '/assets/login/login.partial.html',
               controller: 'LoginController'
             })
+            .when('/accomodation', {
+              templateUrl: '/assets/partials/accomodation.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/venue', {
+              templateUrl: '/assets/partials/venue.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/contact', {
+              templateUrl: '/assets/partials/contact.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/schedule', {
+              templateUrl: '/assets/partials/schedule.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/menu', {
+              templateUrl: '/assets/partials/menu.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/gifts', {
+              templateUrl: '/assets/partials/gifts.partial.html',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
             .otherwise({
               redirectTo: '/'
             });

@@ -1,5 +1,15 @@
 .page-header {
+
+  h1,h2 {
+    line-height: 0.8;
+    small {
+      color: darken(#fff, 10%);
+    }
+  }
+
   h1 {
+    color: darken(#fff, 40%);
+
     @media (min-width: $screen-sm-min) {
       font-size: 75px;
     }
@@ -10,6 +20,22 @@
 
     @media (min-width: $screen-lg-min) {
       font-size: 125px;
+    }
+  }
+
+  h2 {
+    color: darken(#fff, 30%);
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 50px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 75px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 100px;
     }
   }
 

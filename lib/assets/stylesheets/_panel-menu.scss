@@ -7,9 +7,9 @@ $nav-btn-hover-border-color: darken(rgba(#fff, 0.5), 50%);
 $nav-btn-background-color: darken(rgba(#000, 0), 50%);
 $nav-btn-hover-background-color: rgba(#000, 0.25);
 
-.nav-menu {
-  .nav-btn {
-    transition: border-color 300ms, color 300ms, background-color 300ms;
+.panel-menu {
+  .panel-btn {
+    transition: border-color 300ms, color 300ms, background-color 300ms, width 300ms, height 300ms;
 
     border: 2px solid $nav-btn-border-color;
     padding: 10px;
