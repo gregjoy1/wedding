@@ -1,8 +1,38 @@
+<menu-button class="fade-in-animation"></menu-button>
+
 <div class="container fade-in-animation">
   <div class="row">
     <div class="page-header no-border">
-      <h1 class="center-align underline">RSPV</h1>
+      <h1 class="center-align bold underline">RSPV</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="center-align-xs">Please let us know who is coming</h1>
+    </div>
+  </div>
+
+  <div class="row panel-menu border-top">
+    <div class="col-xs-12 panel-box" ng-repeat="guest in login.guests">
+
+      <div class="col-xs-12 col-md-4">
+        <h2 class="center-align-xs"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ guest.name }}</h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 margin-bottom-sm-xs-only">
+        <div class="panel-btn panel-btn-success-hover">
+          <h2><i class="fa fa-user-plus"></i>&nbsp;Coming</h2>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="panel-btn panel-btn-warning-hover">
+          <h2><i class="fa fa-user-times"></i>&nbsp;Not Coming</h2>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<footer class="fade-in-animation"></footer>

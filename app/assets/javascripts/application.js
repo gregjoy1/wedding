@@ -29,6 +29,10 @@
 //
 //= require login/login.module.js
 //= require login/login.controller.js
+//
+//= require directives/directives.module.js
+//= require directives/menu-button.directive.js
+//= require directives/footer.directive.js
 
 ; (function (angular) {
 
@@ -41,7 +45,8 @@
       'session',
       'home',
       'rspv',
-      'login'
+      'login',
+      'directives'
     ]
   )
     .config(

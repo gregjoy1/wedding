@@ -9,3 +9,29 @@
 .bold {
   font-weight: 700;
 }
+
+.center-align-xs {
+  text-align: center;
+
+  @media (min-width: $screen-sm-min) {
+    text-align: left;
+  }
+}
+
+.text-success-hover {
+  &:hover {
+    color: $brand-success !important;
+  }
+}
+
+.text-warning-hover {
+  &:hover {
+    color: $brand-warning !important;
+  }
+}
+
+.text-danger-hover {
+  &:hover {
+    color: $brand-danger !important;
+  }
+}

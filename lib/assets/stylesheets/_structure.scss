@@ -21,9 +21,25 @@ body {
   }
 }
 
+.margin-top-lg {
+  margin-top: 40px;
+}
+
 .margin-bottom-md {
   margin-bottom: 25px;
 }
+
+.margin-bottom-sm {
+  margin-bottom: 15px;
+}
+
+.margin-bottom-sm-xs-only {
+  margin-bottom: 15px;
+  @media (min-width: $screen-sm-min) {
+    margin-bottom: inherit;
+  }
+}
+
 
 .padding-md {
   padding: 25px;
@@ -36,3 +52,24 @@ body {
 .no-padding {
   padding: 0;
 }
+
+.border {
+  border: 1px solid $gray-dark;
+}
+
+.border-top {
+  border-top: 1px solid $gray-dark;
+}
+
+.static-top-left {
+  position: static;
+  top: 10px;
+  left: 10px;
+}
+
+.static-bottom {
+  position: static;
+  bottom: 10px;
+}
+
+
