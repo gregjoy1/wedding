@@ -52,6 +52,21 @@ $nav-btn-hover-background-color: rgba(#000, 0.25);
       padding: 0;
     }
 
+    &.panel-btn-success {
+      border-color: $brand-success;
+      color: $brand-success;
+    }
+
+    &.panel-btn-warning {
+      border-color: $brand-warning;
+      color: $brand-warning;
+    }
+
+    &.panel-btn-primary {
+      border-color: $brand-primary;
+      color: $brand-primary;
+    }
+
     &.panel-btn-success-hover {
       &:hover {
         border-color: $brand-success;
@@ -63,6 +78,13 @@ $nav-btn-hover-background-color: rgba(#000, 0.25);
       &:hover {
         border-color: $brand-warning;
         color: $brand-warning;
+      }
+    }
+
+    &.panel-btn-primary-hover {
+      &:hover {
+        border-color: $brand-primary;
+        color: $brand-primary;
       }
     }
 

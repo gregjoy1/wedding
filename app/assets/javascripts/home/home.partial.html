@@ -11,6 +11,8 @@
         <h1>
           <i class="fa {{ page.faClass }} fa-lg"></i>
           &nbsp;&nbsp;{{ page.title }}
+          <br class="hidden-md hidden-lg">
+          <small class="text-primary center-align-xs" ng-show="!!page.subtitle">{{ page.subtitle }}</small>
         </h1>
       </div>
     </div>

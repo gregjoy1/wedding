@@ -15,6 +15,7 @@
 //
 //= require angular/angular
 //= require angular-route/angular-route
+//= require angular-promise-extras/angular-promise-extras.js
 //
 //= require lodash/dist/lodash
 //
@@ -30,6 +31,9 @@
 //= require login/login.module.js
 //= require login/login.controller.js
 //
+//= require guests/guests.module.js
+//= require guests/guests.service.js
+//
 //= require directives/directives.module.js
 //= require directives/menu-button.directive.js
 //= require directives/footer.directive.js
@@ -42,11 +46,13 @@
     'wedding',
     [
       'ngRoute',
+      'ngPromiseExtras',
       'session',
       'home',
       'rspv',
       'login',
-      'directives'
+      'directives',
+      'guests'
     ]
   )
     .config(
@@ -81,6 +87,12 @@
             .when('/rspv', {
               templateUrl: '/assets/rspv/rspv.partial.html',
               controller: 'RspvController',
+              resolve: {
+                login: getCurrentLogin
+              }
+            })
+            .when('/rspv/confirm', {
+              templateUrl: '/assets/rspv/rspv.confirm.partial.html',
               resolve: {
                 login: getCurrentLogin
               }

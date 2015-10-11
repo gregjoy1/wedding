@@ -15,6 +15,7 @@
               classString: 'col-xs-12 margin-bottom-md',
               faClass: 'fa-check-square-o',
               title: 'Please RSPV',
+              subtitle: 'Please complete by June 2016',
               go: function () {
                 $location.url('/rspv');
               }
