@@ -11,34 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920163055) do
+ActiveRecord::Schema.define(version: 20151018142926) do
+
+  create_table "guest_menu_items", force: :cascade do |t|
+    t.integer "guest_id",     limit: 4
+    t.integer "menu_item_id", limit: 4
+  end
 
   create_table "guests", force: :cascade do |t|
-    t.string   "name"
-    t.string   "rspv"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "login_id"
+    t.string   "name",       limit: 255
+    t.string   "rspv",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "login_id",   limit: 4
   end
 
-  add_index "guests", ["login_id"], name: "index_guests_on_login_id"
+  add_index "guests", ["login_id"], name: "index_guests_on_login_id", using: :btree
 
   create_table "login_histories", force: :cascade do |t|
-    t.string   "user_agent"
+    t.string   "user_agent",    limit: 255
     t.datetime "logged_in"
     t.datetime "last_activity"
-    t.integer  "login_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "login_id",      limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "login_histories", ["login_id"], name: "index_login_histories_on_login_id"
+  add_index "login_histories", ["login_id"], name: "index_login_histories_on_login_id", using: :btree
 
   create_table "logins", force: :cascade do |t|
-    t.string   "name"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.string   "password",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.string "name",        limit: 255
+    t.string "description", limit: 255
+    t.string "labels",      limit: 255
   end
 
 end

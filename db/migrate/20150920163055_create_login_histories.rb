@@ -1,5 +1,5 @@
 class CreateLoginHistories < ActiveRecord::Migration
-  def change
+  def up
     create_table :login_histories do |t|
       t.string :user_agent
       t.datetime :logged_in
@@ -8,5 +8,9 @@ class CreateLoginHistories < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+  end
+
+  def down
+    drop_table :login_histories
   end
 end
