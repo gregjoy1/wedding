@@ -7,7 +7,8 @@ module GuestHelper
     {
       :id => guest.id,
       :name => guest.name,
-      :rspv => guest.rspv
+      :rspv => guest.rspv,
+      :meal_choices => MenuItemHelper.sort_into_types(guest.menu_items)
     }
   end
 

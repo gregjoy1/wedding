@@ -1,11 +1,13 @@
 require 'csv'
 
 desc "Import Guests from CSV file"
-task :import => [:environment] do
+task :import_guests => [:environment] do
 
   file = "db/guests.csv"
 
   CSV.foreach(file, :headers => true) do |row|
+    puts "Importing #{row[0]}"
+
     login = Login.create(
       name: row[0],
       password: HashHelper.password_hash(row[1])
