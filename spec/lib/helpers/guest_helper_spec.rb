@@ -28,6 +28,7 @@ RSpec.describe GuestHelper do
 
   after(:each) do
     @guest.destroy!
+    MenuItem.destroy_all
   end
 
   context 'serialize_guest' do

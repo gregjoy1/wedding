@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'session/logout'
 
     put 'guests/:guest_id' => 'guests#update_guest'
+    get 'menu_items/' => 'menu_items#get_all_menu_items'
   end
 
   root 'index#index'

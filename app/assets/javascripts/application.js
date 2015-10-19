@@ -31,6 +31,10 @@
 //= require login/login.module.js
 //= require login/login.controller.js
 //
+//= require menu/menu.module.js
+//= require menu/menu.service.js
+//= require menu/menu.controller.js
+//
 //= require guests/guests.module.js
 //= require guests/guests.service.js
 //
@@ -52,7 +56,8 @@
       'rspv',
       'login',
       'directives',
-      'guests'
+      'guests',
+      'menu'
     ]
   )
     .config(
@@ -126,9 +131,19 @@
               }
             })
             .when('/menu', {
-              templateUrl: '/assets/partials/menu.partial.html',
+              templateUrl: '/assets/menu/menu.partial.html',
+              controller: 'MenuController',
               resolve: {
-                login: getCurrentLogin
+                login: getCurrentLogin,
+                menuItems: ['MenuService', function (MenuService) {
+                  return MenuService.getAllMenuItems()
+                    .then(function (response) {
+                      return response.data.data.menu_items;
+                    })
+                    .catch(function () {
+                      return [];
+                    });
+                }]
               }
             })
             .when('/gifts', {
