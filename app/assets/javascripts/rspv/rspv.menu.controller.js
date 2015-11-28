@@ -3,15 +3,30 @@
 
   angular.module('rspv')
     .controller(
-      'RspvController',
+      'RspvMenuController',
       [
         '$scope',
         '$q',
         '$location',
+        'menuItems',
         'login',
         'GuestsService',
-        function ($scope, $q, $location, login, GuestsService) {
+        'MenuService',
+        function ($scope, $q, $location, menuItems, login, GuestsService, MenuService) {
           $scope.login = login;
+          $scope.menuItems = menuItems;
+
+          $scope.selectingMenuFor;
+
+          $scope.selectMenuFor = function (guest) {
+            $scope.selectingMenuFor = (
+              angular.isDefined(guest) ?
+                guest.name :
+                undefined
+            );
+          };
+
+          $scope.menuCategories = MenuService.getAllMenuCategories();
 
           $scope.beingSubmitted = false;
           $scope.guests = _.map(login.guests, mapGuest);
@@ -61,7 +76,7 @@
             $q.allSettled(promises)
               .then(function (responses) {
                 if (!_.contains(_.map(responses, 'state'), 'rejected')) {
-                  $location.url('/rspv/menu');
+                  $location.url('/rspv/confirm');
                 }
               });
           }
@@ -71,4 +86,5 @@
     );
 
 }(window.angular, window._));
+
 

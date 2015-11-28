@@ -7,9 +7,12 @@
     </div>
   </div>
 
-  <div class="col-xs-6 col-xs-offset-3">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
     <form class="form-horizontal">
-      <div class="form-group">
+      <div class="form-group" ng-class="getLoginFormClass()">
+        <h3 class="text-danger margin-top-none" ng-show="showError">
+          Incorrect password, please try again.
+        </h3>
         <input type="password" class="form-control col-xs-12 input-lg" id="password" placeholder="Please enter the password you were provided" ng-model="formParams.password">
       </div>
       <div class="form-group panel-menu">
@@ -20,19 +23,6 @@
         </button>
       </div>
     </form>
-  </div>
-</div>
-
-<div class="container fade-in-animation">
-  <div class="row panel-menu">
-    <div class="{{ page.classString }}" ng-repeat="page in pages" ng-click="page.go()">
-      <div class="panel-btn">
-        <h1>
-          <i class="fa {{ page.faClass }} fa-lg"></i>
-          &nbsp;&nbsp;{{ page.title }}
-        </h1>
-      </div>
-    </div>
   </div>
 </div>
 

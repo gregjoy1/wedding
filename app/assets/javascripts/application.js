@@ -24,6 +24,7 @@
 //
 //= require rspv/rspv.module.js
 //= require rspv/rspv.controller.js
+//= require rspv/rspv.menu.controller.js
 //
 //= require session/session.module.js
 //= require session/session.service.js
@@ -94,6 +95,22 @@
               controller: 'RspvController',
               resolve: {
                 login: getCurrentLogin
+              }
+            })
+            .when('/rspv/menu', {
+              templateUrl: '/assets/rspv/rspv.menu.partial.html',
+              controller: 'RspvMenuController',
+              resolve: {
+                login: getCurrentLogin,
+                menuItems: ['MenuService', function (MenuService) {
+                  return MenuService.getAllMenuItems()
+                    .then(function (response) {
+                      return response.data.data.menu_items;
+                    })
+                    .catch(function () {
+                      return [];
+                    });
+                }]
               }
             })
             .when('/rspv/confirm', {

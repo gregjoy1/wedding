@@ -14,6 +14,22 @@
           return {
             getAllMenuItems: function () {
               return $http.get(_menuItemsApiRoute);
+            },
+            getAllMenuCategories: function () {
+              return [
+                {
+                  name: 'starter',
+                  title: 'Starter'
+                },
+                {
+                  name: 'main',
+                  title: 'Main'
+                },
+                {
+                  name: 'desert',
+                  title: 'Desert'
+                }
+              ];
             }
           };
         }

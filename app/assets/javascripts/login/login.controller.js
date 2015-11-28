@@ -9,8 +9,16 @@
         '$location',
         'SessionService',
         function ($scope, $location, SessionService) {
+          $scope.showError = false;
+
           $scope.formParams = {
             password: ''
+          };
+
+          $scope.getLoginFormClass = function () {
+            return {
+              'has-error': $scope.showError
+            };
           };
 
           $scope.login = function () {
@@ -19,7 +27,7 @@
                 $location.path('/');
               })
               .catch(function () {
-                alert('bad');
+                $scope.showError = true;
               });
           };
         }

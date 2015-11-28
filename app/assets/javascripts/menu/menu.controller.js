@@ -12,21 +12,7 @@
           $scope.login = login;
           $scope.menuItems = menuItems;
 
-          $scope.menuCategories = [
-            {
-              name: 'starter',
-              title: 'Starter'
-            },
-            {
-              name: 'main',
-              title: 'Main'
-            },
-            {
-              name: 'desert',
-              title: 'Desert'
-            }
-          ];
-
+          $scope.menuCategories = MenuService.getAllMenuCategories();
         }
       ]
     );
