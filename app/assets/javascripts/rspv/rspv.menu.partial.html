@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div ng-repeat="guest in guests" class="panel-menu" ng-show="!selectingMenuFor">
+  <div ng-repeat="guest in getAllComingGuests()" class="panel-menu" ng-show="!selectingMenuFor">
     <div class="row panel-btn margin-top-sm" ng-click="selectMenuFor(guest)">
       <h2><i class="fa fa-cutlery"></i>&nbsp;&nbsp;<strong>Select menu choices for {{ guest.name }}</strong></h2>
     </div>

@@ -10,23 +10,28 @@ class GuestsController < ApplicationController
 
     guest = Guest.find(guest_id)
 
-    if guest.nil?
-      status = 404
-      errors << 'Guest not found'
-    elsif params['rspv'].nil?
-      status = 400
-      errors << 'Bad Request'
-    elsif current_login.nil?
-      status = 403
-      errors << 'Not authenticated to alter guest'
-    elsif (current_login.guests.map { |guest| guest.id }).include?(guest_id)
-      guest.rspv = params['rspv']
+    begin
+
+      raise 404 if guest.nil?
+      raise 403 if current_login.nil?
+      raise 400 if !(current_login.guests.map { |guest| guest.id }).include?(guest_id)
+      raise 400 if menu_item_request_invalid?(params['menu_items'])
+
+      guest.rspv = params['rspv'] if params['rspv'].present?
+      guest.menu_items = MenuItem.where(:id => params['menu_items']) if params['menu_item'].present?
+
       guest.save
 
       data[:guest] = GuestHelper.serialize_guest(guest)
-    else
-      status = 400
-      errors << 'Bad Request'
+
+    rescue => error_status
+      status error_status
+
+      errors << {
+        400 => 'Bad Request',
+        403 => 'Not authenticated to alter guest',
+        404 => 'Guest not found'
+      }[error_status]
     end
 
     render plain: ApiHelper.render_response(errors, data), status: status

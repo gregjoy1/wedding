@@ -26,6 +26,12 @@
             );
           };
 
+          $scope.getAllComingGuests = function () {
+              return _.select(login.guests, function (guest) {
+                  return (guest.rspv.toLowerCase() === 'coming');
+              });
+          };
+
           $scope.menuCategories = MenuService.getAllMenuCategories();
 
           $scope.beingSubmitted = false;
