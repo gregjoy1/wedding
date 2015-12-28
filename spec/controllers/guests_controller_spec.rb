@@ -136,13 +136,12 @@ RSpec.describe GuestsController do
           @data = JSON.parse(response.body)
         end
 
-        it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
-          expect(@data['error'][0]).to eql('Bad Request')
+        it 'does not return an error' do
+          expect(@data['error'].count).to eql(0)
         end
 
         it 'returns 403' do
-          expect(response.status).to eql(400)
+          expect(response.status).to eql(200)
         end
       end
 
@@ -166,8 +165,9 @@ RSpec.describe GuestsController do
         end
 
         it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
+          expect(@data['error'].count).to eql(2)
           expect(@data['error'][0]).to eql('Bad Request')
+          expect(@data['error'][1]).to eql('Menu items not supplied correctly')
         end
 
         it 'returns 403' do
@@ -195,8 +195,9 @@ RSpec.describe GuestsController do
         end
 
         it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
+          expect(@data['error'].count).to eql(2)
           expect(@data['error'][0]).to eql('Bad Request')
+          expect(@data['error'][1]).to eql('You cannot have more than one menu item per type')
         end
 
         it 'returns 403' do
@@ -227,8 +228,9 @@ RSpec.describe GuestsController do
         end
 
         it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
+          expect(@data['error'].count).to eql(2)
           expect(@data['error'][0]).to eql('Bad Request')
+          expect(@data['error'][1]).to eql('Menu items not supplied correctly')
         end
 
         it 'returns 403' do
@@ -243,13 +245,12 @@ RSpec.describe GuestsController do
           @data = JSON.parse(response.body)
         end
 
-        it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
-          expect(@data['error'][0]).to eql('Bad Request')
+        it 'does not return an error' do
+          expect(@data['error'].count).to eql(0)
         end
 
-        it 'returns 403' do
-          expect(response.status).to eql(400)
+        it 'returns 200' do
+          expect(response.status).to eql(200)
         end
       end
 
@@ -261,8 +262,9 @@ RSpec.describe GuestsController do
         end
 
         it 'returns an error' do
-          expect(@data['error'].count).to eql(1)
+          expect(@data['error'].count).to eql(2)
           expect(@data['error'][0]).to eql('Bad Request')
+          expect(@data['error'][1]).to eql('Menu items not supplied correctly')
         end
 
         it 'returns 403' do

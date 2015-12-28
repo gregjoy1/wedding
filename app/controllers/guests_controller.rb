@@ -12,10 +12,14 @@ class GuestsController < ApplicationController
 
     begin
 
-      raise 404 if guest.nil?
-      raise 403 if current_login.nil?
-      raise 400 if !(current_login.guests.map { |guest| guest.id }).include?(guest_id)
-      raise 400 if menu_item_request_invalid?(params['menu_items'])
+      raise "404" if guest.nil?
+      raise "403" if current_login.nil?
+      raise "400" if !(current_login.guests.map { |guest| guest.id }).include?(guest_id)
+
+      if params['menu_items'].present? and menu_item_error = MenuItemHelper.menu_item_request_invalid?(params['menu_items'])
+        errors << menu_item_error
+        raise "400"
+      end
 
       guest.rspv = params['rspv'] if params['rspv'].present?
       guest.menu_items = MenuItem.where(:id => params['menu_items']) if params['menu_item'].present?
@@ -24,14 +28,23 @@ class GuestsController < ApplicationController
 
       data[:guest] = GuestHelper.serialize_guest(guest)
 
-    rescue => error_status
-      status error_status
+    rescue => error
+      error_status = error.message
 
       errors << {
-        400 => 'Bad Request',
-        403 => 'Not authenticated to alter guest',
-        404 => 'Guest not found'
+        "400" => 'Bad Request',
+        "403" => 'Not authenticated to alter guest',
+        "404" => 'Guest not found'
       }[error_status]
+
+      errors = errors.reverse
+
+      # If error is one of the above, use the error code, if not then throw 500
+      status = (
+        errors.count > 0 ?
+        error_status.to_i :
+        500
+      )
     end
 
     render plain: ApiHelper.render_response(errors, data), status: status
