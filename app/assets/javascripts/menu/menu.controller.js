@@ -8,7 +8,8 @@
         '$scope',
         'menuItems',
         'login',
-        function ($scope, menuItems, login) {
+        'MenuService',
+        function ($scope, menuItems, login, MenuService) {
           $scope.login = login;
           $scope.menuItems = menuItems;
 
