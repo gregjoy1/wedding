@@ -2,20 +2,32 @@
 
 <div class="container fade-in-animation">
   <div class="row">
-    <div class="page-header no-border">
-      <h1 class="center-align bold underline">RSPV</h1>
+    <div class="col-xs-12">
+      <div class="page-header no-border">
+        <h1 class="center-align bold underline">RSPV</h1>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="center-align-xs">
-        Thank you for submitting your RSPV
+      <h1 class="center-align text-success">
+        Thank you for submitting your RSPV!
       </h1>
+
+      <h2 class="center-align text-success" ng-show="anyoneComing()">
+        We look forward to sharing our day with you&nbsp;<i class="fa fa-smile-o"></i>
+      </h2>
+
+      <h2 class="center-align text-danger" ng-hide="anyoneComing()">
+        We are sorry we cant share our special day with you, hope to see you soon!&nbsp;<i class="fa fa-frown-o"></i>
+      </h2>
     </div>
   </div>
 
 </div>
+
+<br>
 
 <footer></footer>
 

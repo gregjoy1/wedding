@@ -25,6 +25,7 @@
 //= require rspv/rspv.module.js
 //= require rspv/rspv.controller.js
 //= require rspv/rspv.menu.controller.js
+//= require rspv/rspv.confirm.controller.js
 //
 //= require session/session.module.js
 //= require session/session.service.js
@@ -129,6 +130,7 @@
             })
             .when('/rspv/confirm', {
               templateUrl: '/assets/rspv/rspv.confirm.partial.html',
+              controller: 'RspvConfirmController',
               resolve: {
                 login: getCurrentLogin
               }
