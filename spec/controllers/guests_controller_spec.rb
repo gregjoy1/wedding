@@ -119,7 +119,7 @@ RSpec.describe GuestsController do
 
       context 'when provided with valid menu items' do
         before(:each) do
-          mocked_request = [
+          @mocked_request = [
             {
               :id => @menu_items[:starter].first.id
             },
@@ -131,7 +131,7 @@ RSpec.describe GuestsController do
             }
           ]
 
-          put :update_guest, guest_id: @user1.guests.first.id, menu_items: mocked_request, format: :json
+          put :update_guest, guest_id: @user1.guests.first.id, menu_items: @mocked_request, format: :json
 
           @data = JSON.parse(response.body)
         end
@@ -142,6 +142,14 @@ RSpec.describe GuestsController do
 
         it 'returns 403' do
           expect(response.status).to eql(200)
+        end
+
+        it 'adds the menu items to the guest' do
+          expect(@user1.guests[0].menu_items.count).to eql(3)
+
+          @mocked_request.each_with_index do |menu_item, index|
+            expect(@user1.guests[0].menu_items[index][:id]).to eql(menu_item[:id])
+          end
         end
       end
 

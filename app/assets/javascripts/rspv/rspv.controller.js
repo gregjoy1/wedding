@@ -61,7 +61,13 @@
             $q.allSettled(promises)
               .then(function (responses) {
                 if (!_.contains(_.map(responses, 'state'), 'rejected')) {
-                  $location.url('/rspv/menu');
+                  // work out if anyones coming
+                  var anyoneComing = !!_.find($scope.guests, function (guest) {
+                    return (guest.rspv === 'coming');
+                  });
+
+                  // send them to the right place
+                  $location.url('/rspv/' + (anyoneComing ? 'menu' : 'confirm'));
                 }
               });
           }

@@ -22,7 +22,12 @@ class GuestsController < ApplicationController
       end
 
       guest.rspv = params['rspv'] if params['rspv'].present?
-      guest.menu_items = MenuItem.where(:id => params['menu_items']) if params['menu_item'].present?
+
+      if params['menu_items'].present?
+        menu_items = params['menu_items'].map { |menu_item| menu_item[:id] }
+
+        guest.menu_items = MenuItem.where(:id => menu_items)
+      end
 
       guest.save
 

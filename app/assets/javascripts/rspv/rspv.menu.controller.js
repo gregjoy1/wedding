@@ -9,81 +9,80 @@
         '$q',
         '$location',
         'menuItems',
+        'comingGuests',
         'login',
         'GuestsService',
         'MenuService',
-        function ($scope, $q, $location, menuItems, login, GuestsService, MenuService) {
+        function ($scope, $q, $location, menuItems, comingGuests, login, GuestsService, MenuService) {
+          $scope.selectingMenuFor;
+          $scope.beingSubmitted = false;
+
           $scope.login = login;
           $scope.menuItems = menuItems;
+          $scope.comingGuests = comingGuests;
 
-          $scope.selectingMenuFor;
-
-          $scope.selectMenuFor = function (guest) {
-            $scope.selectingMenuFor = (
-              angular.isDefined(guest) ?
-                guest.name :
-                undefined
-            );
-          };
-
-          $scope.getAllComingGuests = function () {
-              return _.select(login.guests, function (guest) {
-                  return (guest.rspv.toLowerCase() === 'coming');
-              });
-          };
+          $scope.selectMenuFor = selectMenuFor;
+          $scope.selectMenuItemFor = selectMenuItemFor;
+          $scope.isMenuItemSelectedForGuest = isMenuItemSelectedForGuest;
+          $scope.confirmMenuItems = confirmMenuItems;
+          $scope.hasMenuBeenDecidedFor = hasMenuBeenDecidedFor;
+          $scope.hasMenuBeenDecidedForAllGuests = hasMenuBeenDecidedForAllGuests;
+          $scope.finish = finishChoosingMenuItems;
 
           $scope.menuCategories = MenuService.getAllMenuCategories();
 
-          $scope.beingSubmitted = false;
-          $scope.guests = _.map(login.guests, mapGuest);
-          $scope.canSubmitRspv = canSubmitRspv;
-          $scope.submitRspv = submitRspv;
-
-          function mapGuest(guest) {
-            guest.comingBtnClass = function () {
-              return {
-                'panel-btn-success': (guest.rspv !== '-' && guest.rspv === 'coming')
-              };
-            };
-
-            guest.notComingBtnClass = function () {
-              return {
-                'panel-btn-warning': (guest.rspv !== '-' && guest.rspv !== 'coming')
-              };
-            };
-
-            guest.updateRspv = function (coming) {
-              guest.rspv = (coming ? 'coming' : 'notcoming');
-            };
-
-            return guest;
+          function finishChoosingMenuItems() {
+            $location.url('/rspv/confirm');
           }
 
-          function canSubmitRspv() {
-            var canSubmit = true;
-
-            _.each($scope.guests, function (guest) {
-              if (guest.rspv === '-') {
-                canSubmit = false;
-              }
+          function hasMenuBeenDecidedForAllGuests() {
+            return !_.find($scope.comingGuests, function (guest) {
+              return (hasMenuBeenDecidedFor(guest) === false);
             });
-
-            return canSubmit;
           }
 
-          function submitRspv() {
-            var promises = [];
-            $scope.beingSubmitted = true;
+          function hasMenuBeenDecidedFor(guest) {
+            return !_.find(guest.meal_choices, function (mealChoice) {
+              // if there are no meal choices at all
+              return !mealChoice.length;
+            });
+          }
 
-            _.each($scope.guests, function (guest) {
-              promises.push(GuestsService.updateGuest(guest.id, 'rspv', guest.rspv));
+          function selectMenuFor(guest) {
+            $scope.selectingMenuFor = (
+              angular.isDefined(guest) ?
+                guest :
+                undefined
+            );
+          }
+
+          function selectMenuItemFor(menuItem, category) {
+            $scope.selectingMenuFor.meal_choices[category.name] = [menuItem];
+          }
+
+          function isMenuItemSelectedForGuest(menuItem, category) {
+            if (!$scope.selectingMenuFor.meal_choices[category.name].length) {
+              return false;
+            }
+
+            return ($scope.selectingMenuFor.meal_choices[category.name][0].id === menuItem.id);
+          }
+
+          function confirmMenuItems() {
+            var guest = $scope.selectingMenuFor;
+
+            var chosenMenuItems = _.map(guest.meal_choices, function (category) {
+              return {
+                id: category[0].id
+              };
             });
 
-            $q.allSettled(promises)
-              .then(function (responses) {
-                if (!_.contains(_.map(responses, 'state'), 'rejected')) {
-                  $location.url('/rspv/confirm');
-                }
+            GuestsService.updateGuest(guest.id, 'menu_items', chosenMenuItems)
+              .then(function (response) {
+                $scope.selectMenuFor();
+              })
+              .catch(function (error) {
+                console.log('TODO, sort this!!');
               });
           }
 

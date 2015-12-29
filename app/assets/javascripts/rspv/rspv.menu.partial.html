@@ -9,20 +9,26 @@
     </div>
   </div>
 
-  <div ng-repeat="guest in getAllComingGuests()" class="panel-menu" ng-show="!selectingMenuFor">
+  <div ng-repeat="guest in comingGuests" class="panel-menu" ng-show="!selectingMenuFor">
     <div class="row panel-btn margin-top-sm" ng-click="selectMenuFor(guest)">
-      <h2><i class="fa fa-cutlery"></i>&nbsp;&nbsp;<strong>Select menu choices for {{ guest.name }}</strong></h2>
+      <h2>
+        <i class="fa fa-cutlery"></i>&nbsp;&nbsp;
+        <strong>{{ hasMenuBeenDecidedFor(guest) ? 'Change' : 'Select' }} menu choices for {{ guest.name }}</strong>
+      </h2>
     </div>
   </div>
 
   <div class="row border-bottom fade-in-animation" ng-repeat-start="category in menuCategories" ng-if="!!selectingMenuFor">
     <h1 class="left-align center-align-xs">
-      <strong>{{ selectingMenuFor }}'s {{ category.title | lowercase }}</strong>
+      <strong>{{ selectingMenuFor.name }}'s {{ category.title | lowercase }}</strong>
     </h1>
   </div>
+
   <div class="row panel-menu margin-bottom-sm fade-in-animation" ng-repeat-end ng-if="!!selectingMenuFor">
     <div class="col-xs-12 col-sm-6 col-md-3 center-align-xs margin-top-sm" ng-repeat="menuItem in menuItems[category.name]">
-      <div class="panel-btn">
+      <div class="panel-btn panel-btn-primary-hover"
+        ng-click="selectMenuItemFor(menuItem, category)"
+        ng-class="{'panel-btn-primary': isMenuItemSelectedForGuest(menuItem, category)}">
         <h2><strong>{{ menuItem.name }}</strong></h2>
         <h4>
           <em>
@@ -33,9 +39,16 @@
       </div>
     </div>
   </div>
-  <div class="row panel-menu" ng-if="!!selectingMenuFor">
-    <div class="col-xs-12 panel-btn margin-top-sm" ng-click="selectMenuFor()">
-      <h2><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;<strong>Confirm menu choices for {{ selectingMenuFor }}</strong></h2>
+
+  <div class="row panel-menu fade-in-animation" ng-if="!!selectingMenuFor && hasMenuBeenDecidedFor(selectingMenuFor)">
+    <div class="col-xs-12 panel-btn panel-btn-primary margin-top-sm" ng-click="confirmMenuItems()">
+      <h2><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;<strong>Confirm menu choices for {{ selectingMenuFor.name }}</strong></h2>
+    </div>
+  </div>
+
+  <div class="row panel-menu" ng-if="!!hasMenuBeenDecidedForAllGuests() && !selectingMenuFor">
+    <div class="col-xs-12 panel-btn panel-btn-primary margin-top-sm" ng-click="finish()">
+      <h2><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;<strong>Confirm menu choices for everyone</strong></h2>
     </div>
   </div>
 </div>

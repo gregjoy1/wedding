@@ -102,6 +102,20 @@
               controller: 'RspvMenuController',
               resolve: {
                 login: getCurrentLogin,
+                comingGuests: [
+                  'SessionService',
+                  function (SessionService) {
+                    return SessionService
+                      .isLoggedIn()
+                      .then(function (response) {
+                        return _.select(response.data.data.login.guests, function (guest) {
+                          return (guest.rspv.toLowerCase() === 'coming');
+                        });
+                      })
+                      .catch(function () {
+                        return [];
+                      });
+                }],
                 menuItems: ['MenuService', function (MenuService) {
                   return MenuService.getAllMenuItems()
                     .then(function (response) {
