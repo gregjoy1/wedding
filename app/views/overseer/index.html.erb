@@ -1,0 +1,72 @@
+<div class="container fade-in-animation margin-bottom-md">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header no-border">
+        <h1 class="center-align underline">
+          <strong>Whats going on?</strong>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <% for @login in @logins %>
+    <div class="row">
+      <div class="col-xs-12 border-bottom">
+        <h2 class="left-align">
+          <strong><%= @login.name %></strong>
+          <span class="text-success">(logged in <%= @login.login_historys.count %> times)</span>
+        </h2>
+      </div>
+
+      <% for @guest in @login.guests %>
+             <div class="col-xs-12 panel-menu <%= @guest.rspv != '-' ? 'border-top' : '' %>">
+          <h2 class="left-align center-align-xs">
+            <strong>
+              <% if @guest.rspv == 'notcoming' %>
+                <i class="text-danger fa fa-thumbs-down"></i>
+              <% elsif @guest.rspv == 'coming' %>
+                <i class="text-success fa fa-thumbs-up"></i>
+              <% else %>
+                <i class="text-muted fa fa-question"></i>
+              <% end %>
+              &nbsp;
+              <span class="underline">
+                <%= @guest.name %>
+              </span>
+            </strong>
+          </h2>
+
+          <% for @menu_item in @guest.menu_items %>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 panel-box center-align-xs">
+              <h3 class="no-padding">
+                <strong>
+                  <%= @menu_item.name %>
+                </strong>
+              </h3>
+              <h4>
+                <em class="ng-binding">
+                  <%= @menu_item.description %>
+                  <% if @menu_item.labels %>
+                    <strong class="text-success"><%= @menu_item.labels %></strong>
+                  <% end %>
+                </em>
+              </h4>
+            </div>
+          <% end %>
+
+          <% if @guest.note %>
+            <div class="col-xs-12 panel-box center-align-xs">
+              <h4>
+                <strong>Notes for <%= @guest.name %>:&nbsp;</strong>
+                <%= @guest.note %>
+              </h4>
+            </div>
+          <% end %>
+
+        </div>
+
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     get 'menu_items/' => 'menu_items#get_all_menu_items'
   end
 
+  scope '/overseer' do
+    get '/' => 'overseer#index'
+  end
+
   root 'index#index'
 
 end
