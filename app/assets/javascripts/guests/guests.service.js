@@ -1,4 +1,4 @@
-; (function (angular) {
+; (function (angular, _) {
 
   'use strict';
 
@@ -13,15 +13,19 @@
 
           return {
             updateGuest: function (id, field, value) {
-              var updatedAttribute = {};
-              updatedAttribute[field] = value;
+              var updatedAttributes = field;
 
-              return $http.put(_sessionApiRoute + id, updatedAttribute);
+              if (!_.isObject(field)) {
+                updatedAttributes = {};
+                updatedAttributes[field] = value;
+              }
+
+              return $http.put(_sessionApiRoute + id, updatedAttributes);
             }
           };
         }
       ]
     );
 
-}(window.angular));
+}(window.angular, window._));
 

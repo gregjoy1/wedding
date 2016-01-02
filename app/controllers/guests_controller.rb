@@ -22,6 +22,7 @@ class GuestsController < ApplicationController
       end
 
       guest.rspv = params['rspv'] if params['rspv'].present?
+      guest.note = params['note'] if params['note'].present?
 
       if params['menu_items'].present?
         menu_items = params['menu_items'].map { |menu_item| menu_item[:id] }

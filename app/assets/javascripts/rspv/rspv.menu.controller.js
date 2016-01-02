@@ -77,7 +77,14 @@
               };
             });
 
-            GuestsService.updateGuest(guest.id, 'menu_items', chosenMenuItems)
+            var updatedAttributes = {
+              menu_items: chosenMenuItems,
+              note: guest.note
+            };
+
+            console.log(updatedAttributes);
+
+            GuestsService.updateGuest(guest.id, updatedAttributes)
               .then(function (response) {
                 $scope.selectMenuFor();
               })

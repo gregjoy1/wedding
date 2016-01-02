@@ -76,6 +76,52 @@ RSpec.describe GuestsController do
     end
   end
 
+  context 'update_guest route with updated note' do
+    context 'when logged in with correct login' do
+      before(:each) do
+        session['user'] = @user1.id
+
+        put :update_guest, guest_id: @user1.guests.first.id, note: 'test note', format: :json
+
+        @data = JSON.parse(response.body)
+        @user1.reload
+      end
+
+      after(:each) do
+        session['user'] = nil
+      end
+
+      it 'returns the updated guest' do
+        expect(@data['data']['guest']['note']).to eql('test note')
+      end
+
+      it 'updates the guest' do
+        expect(@user1.guests.first.note).to eql('test note')
+      end
+
+      it 'returns 200' do
+        expect(response.status).to eql(200)
+      end
+    end
+
+    context 'when not logged in' do
+      before(:each) do
+        put :update_guest, guest_id: @user1.guests.first.id, note: 'test note', format: :json
+
+        @data = JSON.parse(response.body)
+      end
+
+      it 'returns an error' do
+        expect(@data['error'].count).to eql(1)
+        expect(@data['error'][0]).to eql('Not authenticated to alter guest')
+      end
+
+      it 'returns 403' do
+        expect(response.status).to eql(403)
+      end
+    end
+  end
+
   context 'update_guest route with menu items' do
 
     before(:each) do
@@ -284,7 +330,7 @@ RSpec.describe GuestsController do
 
   context 'when not logged in' do
     before(:each) do
-      put :update_guest, guest_id: @user1.guests.first.id, rspv: 'coming', format: :json
+      put :update_guest, guest_id: @user1.guests.first.id, note: 'test note', format: :json
 
       @data = JSON.parse(response.body)
     end
