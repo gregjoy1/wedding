@@ -21,6 +21,8 @@
 !/log/.keep
 /tmp
 
+.vagrant/**/*
+
 bower_components
 node_modules
 vendor/assets/components
