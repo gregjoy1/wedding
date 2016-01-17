@@ -18,6 +18,14 @@
   }
 }
 
+.font-size-lg {
+  font-size: 30px;
+}
+
+.font-size-md {
+  font-size: 18px;
+}
+
 .text-success-hover {
   &:hover {
     color: $brand-success !important;
