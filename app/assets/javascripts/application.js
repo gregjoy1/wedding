@@ -43,6 +43,7 @@
 //= require directives/directives.module.js
 //= require directives/menu-button.directive.js
 //= require directives/footer.directive.js
+//= require directives/iframe-stretch.directive.js
 
 ; (function (angular) {
 
@@ -66,7 +67,8 @@
       [
         '$routeProvider',
         '$locationProvider',
-        function ($routeProvider, $locationProvider) {
+        '$sceDelegateProvider',
+        function ($routeProvider, $locationProvider, $sceDelegateProvider) {
 
           var getCurrentLogin = [
             '$location',
@@ -82,6 +84,11 @@
                   });
             }
           ];
+
+          $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            'https://www.google.com/maps/embed**'
+          ]);
 
           $routeProvider
             .when('/', {
