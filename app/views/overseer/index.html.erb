@@ -14,6 +14,9 @@
       <div class="col-xs-12 border-bottom">
         <h2 class="left-align">
           <strong><%= @login.name %></strong>
+          <% if @login.is_evening_guest %>
+            <span class="text-info">(Evening Guest)</span>
+          <% end %>
           <span class="text-success">(logged in <%= @login.login_historys.count %> times)</span>
         </h2>
       </div>

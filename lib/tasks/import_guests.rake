@@ -10,10 +10,11 @@ task :import_guests => [:environment] do
 
     login = Login.create(
       name: row[0],
-      password: HashHelper.password_hash(row[1])
+      password: HashHelper.password_hash(row[1]),
+      is_evening_guest: (row[2] == 'evening')
     )
 
-    for inc in 2..(row.count - 1) do
+    for inc in 3..(row.count - 1) do
       login.guests << Guest.new(
         name: row[inc],
         rspv: '-'

@@ -6,10 +6,14 @@
       'RspvConfirmController',
       [
         '$scope',
-        '$location',
         'login',
-        function ($scope, $location, login) {
+        function ($scope, login) {
           $scope.anyoneComing = anyoneComing;
+          $scope.dayType = (
+            login.is_evening_guest ?
+              'evening' :
+              'day'
+          );
 
           function anyoneComing() {
             return !!_.find(login.guests, function (guest) {

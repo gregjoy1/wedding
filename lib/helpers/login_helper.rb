@@ -3,7 +3,8 @@ module LoginHelper
   def self.serialize_login(login, include_guests: true)
     returned_login = {
       :id => login.id,
-      :name => login.name
+      :name => login.name,
+      :is_evening_guest => login.is_evening_guest
     }
 
     if include_guests

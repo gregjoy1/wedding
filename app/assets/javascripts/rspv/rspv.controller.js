@@ -66,8 +66,10 @@
                     return (guest.rspv === 'coming');
                   });
 
+                  var proceedToMenu = (anyoneComing && !login.is_evening_guest);
+
                   // send them to the right place
-                  $location.url('/rspv/' + (anyoneComing ? 'menu' : 'confirm'));
+                  $location.url('/rspv/' + (proceedToMenu ? 'menu' : 'confirm'));
                 }
               });
           }

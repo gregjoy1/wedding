@@ -10,7 +10,8 @@
         'login',
         function ($scope, $location, login) {
           $scope.login = login;
-          $scope.pages = [
+
+          var pages = [
             {
               classString: 'col-xs-12 margin-bottom-md',
               faClass: 'fa-check-square-o',
@@ -69,6 +70,10 @@
               }
             }
           ];
+
+          $scope.pages = _.reject(pages, function (page) {
+            return (login.is_evening_guest && page.title === 'Menu');
+          });
         }
       ]
     );

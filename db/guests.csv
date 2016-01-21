@@ -1,3 +1,4 @@
-name,password
-"test name one","tn1","test guest one","test guest two"
-"test name two","tn2","person test"
+"name","password","guest type","guests..."
+"test name one","tn1","day","test guest one","test guest two"
+"test name two","tn2","day","person test"
+"test name three","tn3","evening","person test","test guest two"

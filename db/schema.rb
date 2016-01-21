@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102142216) do
+ActiveRecord::Schema.define(version: 20160121221237) do
 
   create_table "guest_menu_items", force: :cascade do |t|
     t.integer "guest_id",     limit: 4
@@ -41,11 +41,12 @@ ActiveRecord::Schema.define(version: 20160102142216) do
   add_index "login_histories", ["login_id"], name: "index_login_histories_on_login_id", using: :btree
 
   create_table "logins", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "password",   limit: 255
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "is_admin",               default: false
+    t.string   "name",             limit: 255
+    t.string   "password",         limit: 255
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "is_admin",                     default: false
+    t.boolean  "is_evening_guest",             default: false
   end
 
   create_table "menu_items", force: :cascade do |t|
