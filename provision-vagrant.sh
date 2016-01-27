@@ -23,17 +23,10 @@ install Byobu byobu
 install Git git
 install memcached memcached
 
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-install MySQL mysql-server libmysqlclient-dev
-mysql -uroot -proot <<SQL
-CREATE USER 'rails'@'localhost';
-CREATE DATABASE activerecord_unittest  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-CREATE DATABASE activerecord_unittest2 DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL PRIVILEGES ON activerecord_unittest.* to 'rails'@'localhost';
-GRANT ALL PRIVILEGES ON activerecord_unittest2.* to 'rails'@'localhost';
-GRANT ALL PRIVILEGES ON inexistent_activerecord_unittest.* to 'rails'@'localhost';
-SQL
+install PostgreSQL postgresql postgresql-contrib libpq-dev
+sudo -u postgres psql -c "CREATE USER admin WITH PASSWORD 'password';"
+sudo -u postgres createdb -O admin wedding_dev
+sudo -u postgres createdb -O admin wedding_test
 
 install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
 install 'ExecJS runtime' nodejs

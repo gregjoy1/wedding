@@ -1,10 +1,10 @@
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
   pool: 5
-  username: root
-  password: root
+  username: admin
+  password: password
   host: localhost
 
 development:
@@ -20,4 +20,7 @@ test:
 
 production:
   <<: *default
-  database: wedding_prod
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>

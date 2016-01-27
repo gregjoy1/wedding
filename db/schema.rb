@@ -13,47 +13,50 @@
 
 ActiveRecord::Schema.define(version: 20160121221237) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "guest_menu_items", force: :cascade do |t|
-    t.integer "guest_id",     limit: 4
-    t.integer "menu_item_id", limit: 4
+    t.integer "guest_id"
+    t.integer "menu_item_id"
   end
 
   create_table "guests", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "rspv",       limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "login_id",   limit: 4
-    t.text     "note",       limit: 65535
+    t.string   "name"
+    t.string   "rspv"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "login_id"
+    t.text     "note"
   end
 
   add_index "guests", ["login_id"], name: "index_guests_on_login_id", using: :btree
 
   create_table "login_histories", force: :cascade do |t|
-    t.string   "user_agent",    limit: 255
+    t.string   "user_agent"
     t.datetime "logged_in"
     t.datetime "last_activity"
-    t.integer  "login_id",      limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "login_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "login_histories", ["login_id"], name: "index_login_histories_on_login_id", using: :btree
 
   create_table "logins", force: :cascade do |t|
-    t.string   "name",             limit: 255
-    t.string   "password",         limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.boolean  "is_admin",                     default: false
-    t.boolean  "is_evening_guest",             default: false
+    t.string   "name"
+    t.string   "password"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "is_admin",         default: false
+    t.boolean  "is_evening_guest", default: false
   end
 
   create_table "menu_items", force: :cascade do |t|
-    t.string "name",        limit: 255
-    t.string "description", limit: 255
-    t.string "labels",      limit: 255
-    t.string "meal_type",   limit: 255
+    t.string "name"
+    t.string "description"
+    t.string "labels"
+    t.string "meal_type"
   end
 
 end
