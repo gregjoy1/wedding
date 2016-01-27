@@ -24,12 +24,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 
-gem 'pry'
-gem 'pry-remote'
-
 gem 'font-awesome-sass'
 
 gem 'angular_rails_csrf'
+gem 'dotenv-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,7 +42,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
-  gem 'dotenv-rails'
+
+  gem 'pry'
+  gem 'pry-remote'
 end
 
 group :development do
