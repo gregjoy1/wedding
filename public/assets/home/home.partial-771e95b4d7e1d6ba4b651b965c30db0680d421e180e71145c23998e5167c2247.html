@@ -1,0 +1,25 @@
+<div class="container fade-in-animation">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header no-border">
+        <h1 class="center-align bold">Welcome, <small>{{ login.name }}!</small></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row panel-menu">
+    <div class="{{ page.classString }}" ng-repeat="page in pages" ng-click="page.go()">
+      <button class="panel-btn col-xs-12">
+        <h1>
+          <i class="fa {{ page.faClass }} fa-lg"></i>
+          &nbsp;&nbsp;{{ page.title }}
+          <br class="hidden-lg">
+          <small class="text-primary center-align-xs" ng-show="!!page.subtitle">{{ page.subtitle }}</small>
+        </h1>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<footer></footer>
