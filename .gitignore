@@ -25,5 +25,3 @@
 
 bower_components
 node_modules
-vendor/assets/components
-public/assets/**/*
