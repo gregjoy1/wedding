@@ -1,0 +1,29 @@
+<div class="container fade-in-animation">
+
+  <div class="row">
+    <div class="page-header no-border">
+      <h1 class="center-align underline">Mel&nbsp;<small class="bold">&amp;</small>&nbsp;Greg&nbsp;</h1>
+      <h2 class="center-align bold no-padding no-margin"><small>2016</small></h2>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <form class="form-horizontal">
+      <div class="form-group" ng-class="getLoginFormClass()">
+        <h3 class="text-danger margin-top-none" ng-show="showError">
+          Incorrect password, please try again.
+        </h3>
+        <input type="password" class="form-control col-xs-12 input-lg" id="password" placeholder="Please enter the password you were provided" ng-model="formParams.password">
+      </div>
+      <div class="form-group panel-menu">
+        <button type="submit" class="panel-btn panel-btn-primary col-xs-12" ng-click="login()">
+          <h3>
+            <i class="fa fa-unlock-alt"></i>&nbsp;Login!
+          </h3>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer></footer>

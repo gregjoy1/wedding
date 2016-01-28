@@ -29,6 +29,7 @@ module Wedding
     end
 
     config.serve_static_files = true
+    config.assets.manifest = "public/assets/manifest.json"
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

@@ -1,0 +1,33 @@
+<menu-button></menu-button>
+
+<div class="container fade-in-animation margin-bottom-md">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header no-border">
+        <h1 class="center-align underline">
+          <strong>Menu</strong>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row border-bottom" ng-repeat-start="category in menuCategories">
+    <h1 class="left-align center-align-xs">
+      <strong>{{ category.title }}</strong>
+    </h1>
+  </div>
+
+  <div class="row panel-menu margin-bottom-sm" ng-repeat-end>
+    <div class="col-xs-12 col-sm-6 col-md-3 panel-box center-align-xs" ng-repeat="menuItem in menuItems[category.name]">
+      <h2><strong>{{ menuItem.name }}</strong></h2>
+      <h4>
+        <em>
+          {{ menuItem.description }}
+          <strong ng-if="!!menuItem.labels" class="text-success">{{ menuItem.labels }}</strong>
+        </em>
+      </h4>
+    </div>
+  </div>
+</div>
+
+<footer></footer>

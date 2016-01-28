@@ -1,0 +1,55 @@
+<menu-button></menu-button>
+
+<div class="container fade-in-animation">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header no-border">
+        <h1 class="center-align bold underline">RSPV</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="center-align-xs">
+        Please let us know who is attending&nbsp;
+        <br class="hidden-md hidden-lg">
+        <small class="text-primary center-align-xs">Please complete by June 2016</small>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row panel-menu border-top">
+    <div class="col-xs-12 panel-box" ng-repeat="guest in login.guests">
+
+      <div class="col-xs-12 col-md-4">
+        <h2 class="center-align-xs"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ guest.name }}</h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 margin-bottom-sm-xs-only">
+        <button class="panel-btn panel-btn-success-hover col-xs-12" ng-click="guest.updateRspv(true)" ng-class="guest.comingBtnClass()">
+          <h2><i class="fa fa-user-plus"></i>&nbsp;Attending</h2>
+        </button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 margin-bottom-sm-xs-only">
+        <button class="panel-btn panel-btn-warning-hover col-xs-12" ng-click="guest.updateRspv(false)" ng-class="guest.notComingBtnClass()">
+          <h2><i class="fa fa-user-times"></i>&nbsp;Not Attending</h2>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row panel-menu margin-top-md fade-in-animation" ng-show="canSubmitRspv()">
+    <div class="col-xs-12 panel-box">
+      <div class="col-xs-12">
+        <button class="panel-btn panel-btn-primary col-xs-12" ng-click="submitRspv()">
+          <h2 ng-show="!beingSubmitted"><i class="fa fa-thumb-tack"></i>&nbsp;Click To Confirm RSPV</h2>
+          <h2 ng-show="beingSubmitted"><i class="fa fa-spinner fa-pulse"></i>&nbsp;Submitting</h2>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer></footer>
