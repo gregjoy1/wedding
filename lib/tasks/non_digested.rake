@@ -1,8 +1,8 @@
 namespace :assets do
   desc "Create copies as non digested assets"
   task :non_digested do
-    assets = Dir.glob(File.expand_path('public/assets/**/*'))
-    manifest_path = assets.find { |f| f =~ /(manifest\.json)/ }
+    assets = Dir.glob(File.expand_path('public/assets/**/.sprockets-manifest-*'))
+    manifest_path = assets[0]
     manifest_data = JSON.load(File.new(manifest_path))
 
     manifest_data["assets"].each do |asset_name, file_name|
