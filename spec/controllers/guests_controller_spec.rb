@@ -128,7 +128,7 @@ RSpec.describe GuestsController do
       @menu_items = {
         :starter => [],
         :main => [],
-        :desert => []
+        :dessert => []
       }
 
       [
@@ -140,10 +140,10 @@ RSpec.describe GuestsController do
         ["Test Main Two","Test Main Two Description","","main"],
         ["Test Main Three","Test Main Three Description","V","main"],
         ["Test Main Four","Test Main Four Description","","main"],
-        ["Test Desert One","Test Desert One Description","V","desert"],
-        ["Test Desert Two","Test Desert Two Description","","desert"],
-        ["Test Desert Three","Test Desert Three Description","V","desert"],
-        ["Test Desert Four","Test Desert Four Description","","desert"],
+        ["Test Desert One","Test Desert One Description","V","dessert"],
+        ["Test Desert Two","Test Desert Two Description","","dessert"],
+        ["Test Desert Three","Test Desert Three Description","V","dessert"],
+        ["Test Desert Four","Test Desert Four Description","","dessert"],
       ].each do |menu_item|
         @menu_items[menu_item[3].to_sym] << MenuItem.create(
           name: menu_item[0],
@@ -173,7 +173,7 @@ RSpec.describe GuestsController do
               :id => @menu_items[:main].first.id
             },
             {
-              :id => @menu_items[:desert].first.id
+              :id => @menu_items[:dessert].first.id
             }
           ]
 
@@ -209,7 +209,7 @@ RSpec.describe GuestsController do
               :id => -1
             },
             {
-              :id => @menu_items[:desert].first.id
+              :id => @menu_items[:dessert].first.id
             }
           ]
 
@@ -239,7 +239,7 @@ RSpec.describe GuestsController do
               :id => @menu_items[:starter].last.id
             },
             {
-              :id => @menu_items[:desert].first.id
+              :id => @menu_items[:dessert].first.id
             }
           ]
 
@@ -272,7 +272,7 @@ RSpec.describe GuestsController do
               :id => @menu_items[:main].last.id
             },
             {
-              :id => @menu_items[:desert].first.id
+              :id => @menu_items[:dessert].first.id
             }
           ]
 

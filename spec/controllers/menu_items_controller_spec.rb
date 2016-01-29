@@ -19,7 +19,7 @@ RSpec.describe MenuItemsController, type: :controller do
     [
       ["Test Starter One","Test Starter One Description","V","starter"],
       ["Test Main Three","Test Main Three Description","V","main"],
-      ["Test Desert Four","Test Desert Four Description","","desert"]
+      ["Test Desert Four","Test Desert Four Description","","dessert"]
     ].each do |menu_item|
       MenuItem.create(
         name: menu_item[0],
@@ -48,7 +48,7 @@ RSpec.describe MenuItemsController, type: :controller do
 
         expect(data['data']['menu_items']['starter'][0]['name']).to eql('Test Starter One')
         expect(data['data']['menu_items']['main'][0]['name']).to eql('Test Main Three')
-        expect(data['data']['menu_items']['desert'][0]['name']).to eql('Test Desert Four')
+        expect(data['data']['menu_items']['dessert'][0]['name']).to eql('Test Desert Four')
 
         session['user'] = nil
       end

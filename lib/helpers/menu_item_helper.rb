@@ -4,7 +4,7 @@ module MenuItemHelper
     sorted_types = {
       :starter => [],
       :main => [],
-      :desert => []
+      :dessert => []
     }
 
     menu_items.each do |menu_item|
