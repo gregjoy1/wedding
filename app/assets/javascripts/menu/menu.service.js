@@ -26,8 +26,8 @@
                   title: 'Main'
                 },
                 {
-                  name: 'desert',
-                  title: 'Desert'
+                  name: 'dessert',
+                  title: 'Dessert'
                 }
               ];
             }
