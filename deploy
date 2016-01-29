@@ -1,0 +1,12 @@
+#!/bin/bash
+
+git checkout .;
+git checkout -b deploy-branch-`date +'%F'`;
+RAILS_ENV=production bundle exec rake assets:clobber;
+RAILS_ENV=production bundle exec rake assets:precompile;
+git add .;
+git commit -m "Precompile assets for Heroku";
+git push heroku master;
+heroku run rake assets:non_digested
+git checkout -;
+git branch -D deploy-branch-`date +'%F'`;
