@@ -23,10 +23,10 @@
             },
             {
               classString: 'col-xs-12 col-sm-6 margin-bottom-md',
-              title: 'Accomodation',
+              title: 'Accommodation',
               faClass: 'fa-bed',
               go: function () {
-                $location.url('/accomodation');
+                $location.url('/accommodation');
               }
             },
             {
