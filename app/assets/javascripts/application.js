@@ -147,7 +147,7 @@
               controller: 'LoginController'
             })
             .when('/accommodation', {
-              templateUrl: '/assets/partials/accommodation.partial.html',
+              templateUrl: '/assets/partials/accomodation.partial.html',
               resolve: {
                 login: getCurrentLogin
               }
